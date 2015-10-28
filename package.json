@@ -1,0 +1,40 @@
+{
+  "name": "redux-entities",
+  "version": "0.0.1",
+  "description": "Higher-order reducer for store entities received from gaearon's normalizr and makes it easy to handle them.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "eslint ./src/*.js",
+    "build": "babel src --out-dir lib",
+    "clean": "rimraf lib",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsmepetrov/redux-entities.git"
+  },
+  "keywords": [
+    "redux",
+    "reducer",
+    "entities",
+    "normalizr",
+    "flux"
+  ],
+  "author": "Anton Petrov <petrov.aap@gmail.com> (http://github.com/itsmepetrov)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itsmepetrov/redux-entities/issues"
+  },
+  "homepage": "https://github.com/itsmepetrov/redux-entities#readme",
+  "devDependencies": {
+    "babel": "^5.8.29",
+    "babel-eslint": "^4.1.3",
+    "eslint": "^1.7.3",
+    "eslint-config-airbnb": "^0.1.0",
+    "eslint-plugin-react": "^3.6.3",
+    "rimraf": "^2.4.3"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1"
+  }
+}
