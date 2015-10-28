@@ -1,6 +1,6 @@
 {
   "name": "redux-entities",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Higher-order reducer for store entities received from gaearon's normalizr and makes it easy to handle them.",
   "main": "lib/index.js",
   "scripts": {
