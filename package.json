@@ -1,13 +1,13 @@
 {
   "name": "redux-entities",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Higher-order reducer for store entities received from gaearon's normalizr and makes it easy to handle them.",
   "main": "lib/index.js",
   "scripts": {
     "test": "eslint ./src/*.js",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm run clean && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
