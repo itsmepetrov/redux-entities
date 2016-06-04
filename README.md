@@ -17,7 +17,7 @@ WIP
 
 ### Use with `entitiesReducer`
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux';
 import { entitiesReducer } from 'redux-entities';
 import omit from 'lodash/object/omit';
 
@@ -58,9 +58,8 @@ export default combineReducers({
 
 ### Use with `combineEntitiesReducers`
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { combineEntitiesReducers } from 'redux-entities';
-import { contacts, groups, images, notes }
+import { contacts, groups, images, notes } from './entities'
 
 export default combineEntitiesReducers({
     contacts,
