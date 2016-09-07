@@ -3,7 +3,7 @@
 [![build status](https://img.shields.io/travis/itsmepetrov/redux-entities/master.svg?style=flat-square)](https://travis-ci.org/itsmepetrov/redux-entities)
 [![npm version](https://img.shields.io/npm/v/redux-entities.svg?style=flat-square)](https://www.npmjs.com/package/redux-entities)
 
-Higher-order reducer for store entities received from gaearon's [normalizr](https://github.com/gaearon/normalizr) and makes it easy to handle them.
+Higher-order reducer for store entities received from [normalizr](https://github.com/paularmstrong/normalizr) and makes it easy to handle them.
 
 ### Installation
 
@@ -19,7 +19,7 @@ WIP
 ```js
 import { combineReducers } from 'redux';
 import { entitiesReducer } from 'redux-entities';
-import omit from 'lodash/object/omit';
+import omit from 'lodash/omit';
 
 function contacts(state = {}, action) {
 
