@@ -1,5 +1,6 @@
 import isFunction from 'lodash/isFunction'
 import mapValues from 'lodash/mapValues'
+import merge from 'lodash/merge'
 import get from 'lodash/get'
 
 function selectEntities(action, name) {
@@ -9,6 +10,10 @@ function selectEntities(action, name) {
   }
 }
 
+export function actionless(state = {}) {
+  return state
+}
+
 export function entitiesReducer(reducer, entitiesName) {
   return (state, action) => {
     let newState = state;
@@ -16,7 +21,7 @@ export function entitiesReducer(reducer, entitiesName) {
       entitiesName(action) : selectEntities(action, entitiesName);
 
     if (entities) {
-        newState = Object.assign({}, newState, entities);
+        newState = merge({}, newState, entities);
     }
 
     return reducer(newState, action);

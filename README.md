@@ -13,59 +13,62 @@ npm install --save redux-entities
 
 ## Usage
 
-WIP
-
 ### Use with `entitiesReducer`
+
 ```js
 import { combineReducers } from 'redux';
 import { entitiesReducer } from 'redux-entities';
-import omit from 'lodash/omit';
+import { merge, omit } from 'lodash';
 
 function contacts(state = {}, action) {
+  const { type, payload } = action;
 
-    const { type, /* , payload */ meta } = action;
+  switch (type) {
 
-    switch (type) {
+  case UPDATE_CONTACT:
+  case REMOVE_CONTACT:
+    return merge({}, state, { [payload.id]: {
+      ...state[payload.id],
+      isPending: true
+    }});
 
-    case UPDATE_CONTACT:
-    case REMOVE_CONTACT:
-        return Object.assign({}, state, { [payload.id]: {
-            ...state[payload.id],
-            isPending: true
-        } });
+  case UPDATE_CONTACT_SUCCESS:
+    return merge({}, state, { [payload.id]: {
+      ...state[payload.id],
+      isPending: false
+    }});
 
-    case UPDATE_CONTACT_SUCCESS:
-        return Object.assign({}, state, { [payload.id]: {
-            ...state[payload.id],
-            isPending: false
-        } });
+  case REMOVE_CONTACT_SUCCESS:
+    return omit(state, meta.id);
 
-        // return merge({}, state, { [meta.id]: { isPending: false } });
-
-    case REMOVE_CONTACT_SUCCESS:
-        return omit(state, meta.id);
-
-    default:
-        return state;
-    }
+  default:
+    return state;
+  }
 }
 
 export default combineReducers({
-    contacts: entitiesReducer(contacts, 'contacts')
+  contacts: entitiesReducer(contacts, 'contacts')
 });
 
 ```
 
 ### Use with `combineEntitiesReducers`
+
 ```js
 import { combineEntitiesReducers } from 'redux-entities';
-import { contacts, groups, images, notes } from './entities'
+import { contacts, groups, images, notes } from './entities';
 
 export default combineEntitiesReducers({
-    contacts,
-    groups,
-    images,
-    notes
+  contacts,
+  groups,
+  images,
+  notes
 });
 
 ```
+
+## Immutable
+
+If you want to use `Immutable` with `Redux` please check out this version of the library: [redux-entities-immutable](https://github.com/beautyfree/redux-entities-immutable)
+
+

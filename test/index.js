@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
-import { entitiesReducer, combineEntitiesReducers } from '../src';
+import { merge } from 'lodash';
+import { entitiesReducer, combineEntitiesReducers, actionless } from '../src';
 
 describe('redux-entities', () => {
   const normalizedObject = {
@@ -28,6 +29,21 @@ describe('redux-entities', () => {
     }
   }
 
+  const normalizedObjectWithNewFields = {
+    entities: {
+      contacts: {
+        1: {
+          id: 1,
+          phone: '54321'
+        },
+        2: {
+          id: 2,
+          phone: '12345'
+        }
+      },
+    }
+  }
+
   const fillEntitiesAction = {
     type: 'FILL_ENTITIES',
     payload: normalizedObject
@@ -37,6 +53,13 @@ describe('redux-entities', () => {
     type: 'FILL_ENTITIES',
     payload: {
       nested: normalizedObject
+    }
+  }
+
+  const fillEntitiesWithNewFieldsAction = {
+    type: 'FILL_ENTITIES',
+    payload: {
+      nested: normalizedObjectWithNewFields
     }
   }
 
@@ -85,7 +108,21 @@ describe('redux-entities', () => {
 
       const state = reducer({}, fillEntitiesNestedAction)
 
-        expect(state).to.deep.equal(normalizedObject.entities.contacts)
+      expect(state).to.deep.equal(normalizedObject.entities.contacts)
+    })
+
+    it('can merge entities fields', () => {
+      const reducer = entitiesReducer(
+        contactsReducer,
+        (action) => action.payload.nested.entities.contacts
+      )
+
+      const state = reducer({}, fillEntitiesNestedAction)
+      const updatedState = reducer(state, fillEntitiesWithNewFieldsAction)
+
+      expect(updatedState).to.deep.equal(
+        merge({}, normalizedObject, normalizedObjectWithNewFields).entities.contacts
+      )
     })
 
     it('can update specific entitie', () => {
@@ -123,6 +160,20 @@ describe('redux-entities', () => {
       const updatedState = reducer(state, updateContactAction)
 
       expect(updatedState.contacts[1]).to.deep.equal({ id: 1, name: 'Andrey' })
+    })
+  })
+
+  describe('actionless', () => {
+    it('should return empty object', () => {
+      const state = actionless()
+
+      expect(state).to.deep.equal({})
+    })
+
+    it('should return passed object', () => {
+      const state = actionless(normalizedObject.entities.contacts)
+
+      expect(state).to.deep.equal(normalizedObject.entities.contacts)
     })
   })
 })
