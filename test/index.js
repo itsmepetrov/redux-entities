@@ -1,7 +1,7 @@
 /* eslint-env mocha */
-import { expect } from 'chai';
-import { merge } from 'lodash';
-import { entitiesReducer, combineEntitiesReducers, actionless } from '../src';
+import { expect } from 'chai'
+import merge from 'lodash.merge'
+import { entitiesReducer, combineEntitiesReducers, actionless } from '../src'
 
 describe('redux-entities', () => {
   const normalizedObject = {
@@ -71,10 +71,10 @@ describe('redux-entities', () => {
     }
   }
 
-  const contactsReducer = (state = {}) => state;
-  const notesReducer = (state = {}) => state;
+  const contactsReducer = (state = {}) => state
+  const notesReducer = (state = {}) => state
   const contactsWithUpdateReducer = (state = {}, action) => {
-    const { type, payload } = action;
+    const { type, payload } = action
     if (type === 'UPDATE_CONTACT') {
       const { id, ...rest } = payload
       return {
@@ -125,7 +125,7 @@ describe('redux-entities', () => {
       )
     })
 
-    it('can update specific entitie', () => {
+    it('can update specific entity', () => {
       const reducer = entitiesReducer(
         contactsWithUpdateReducer,
         'contacts'
@@ -150,7 +150,7 @@ describe('redux-entities', () => {
       expect(state).to.deep.equal(normalizedObject.entities)
     })
 
-    it('can update specific entitie', () => {
+    it('can update specific entity', () => {
       const reducer = combineEntitiesReducers({
         contacts: contactsWithUpdateReducer,
         notes: notesReducer,
