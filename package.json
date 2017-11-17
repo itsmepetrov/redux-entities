@@ -4,7 +4,7 @@
   "description": "Higher-order reducer for store entities received from normalizr and makes it easy to handle them.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --recursive",
+    "test": "mocha --require babel-core/register --recursive",
     "eslint": "eslint ./src/*.js",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
@@ -30,16 +30,19 @@
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^8.0.2",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-stage-1": "^6.13.0",
     "babel-register": "^6.14.0",
-    "chai": "^3.5.0",
-    "eslint": "^3.4.0",
-    "mocha": "^3.0.2",
+    "chai": "^4.1.2",
+    "eslint": "^4.11.0",
+    "mocha": "^4.0.1",
     "rimraf": "^2.4.3"
   },
   "dependencies": {
-    "lodash": "^4.11.2"
+    "lodash.get": "^4.4.2",
+    "lodash.isfunction": "^3.0.8",
+    "lodash.mapvalues": "^4.6.0",
+    "lodash.merge": "^4.6.0"
   }
 }
